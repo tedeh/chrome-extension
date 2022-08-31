@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "TEDEH Personal Chrome Extension",
+  "description": "Mina egna saker",
+  "version": "1.0",
+  "permissions": [
+    "webNavigation",
+    "webRequest",
+    "scripting"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://*.flashback.org/*"],
+      "js": ["flashback.js"]
+    },
+    {
+      "matches": ["https://www.reddit.com/*"],
+      "js": ["reddit.js"]
+    }
+  ]
+}
