@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "TEDEH Personal Chrome Extension",
-  "description": "Mina egna saker",
+  "name": "tedeh.net chrome extension",
+  "description": "My personal selection of necessities",
   "version": "1.0",
   "permissions": [
     "webNavigation",
@@ -16,6 +16,14 @@
     {
       "matches": ["https://www.reddit.com/*"],
       "js": ["reddit.js"]
+    },
+    {
+      "matches": ["https://twitter.com/*"],
+      "js": ["twitter.js"]
+    },
+    {
+      "matches": ["https://*/*"],
+      "js": ["twitter_link_killer.js"]
     }
   ]
 }
