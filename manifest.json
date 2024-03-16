@@ -35,7 +35,12 @@
     },
     {
       "matches": ["https://*/*"],
-      "js": ["twitter_link_killer.js", "amp_link_killer.js", "overflow_hidden_killer.js"]
+      "js": [
+        "twitter_link_killer.js",
+        "amp_link_killer.js",
+        "overflow_hidden_killer.js",
+        "meta_f_stop_propagation.js"
+      ]
     }
   ]
 }
