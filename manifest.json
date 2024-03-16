@@ -39,8 +39,8 @@
         "twitter_link_killer.js",
         "amp_link_killer.js",
         "overflow_hidden_killer.js",
-        "meta_f_stop_propagation.js",
-        "copy_unkiller.js"
+        "meta_f_unabuser.js",
+        "copy_unabuser.js"
       ]
     }
   ]
