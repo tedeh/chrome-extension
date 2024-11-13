@@ -34,6 +34,10 @@
       "js": ["twitter.js"]
     },
     {
+      "matches": ["https://www.fazwaz.com/*"],
+      "js": ["fazwaz_unfucker.js"]
+    },
+    {
       "matches": ["https://*/*"],
       "js": [
         "twitter_link_killer.js",
