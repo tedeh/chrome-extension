@@ -1,0 +1,23 @@
+{
+  "name": "tedeh-chrome-extension",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Tedde Lundgren Chrome Extension",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Tedde Lundgren",
+    "url": "https://tedeh.net"
+  },
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^30.0.5",
+    "jest-environment-jsdom": "^30.0.5"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
