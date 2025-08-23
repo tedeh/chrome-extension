@@ -1,42 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Popup</title>
+    <title>Auto Refresh Settings</title>
     <style>
-      *  {
-        box-sizing: border-box;
-      }
       body {
         min-width: 230px;
+        font-family: sans-serif;
       }
-       input.domain {
+      label {
+        display: flex;
+        flex-direction: column;
+      }
+      input[type="number"] {
         width: 100%;
         padding: 6px;
         border: 1px solid #ccc;
-        border-radius: 6px;
-        margin-bottom: 6px;
-      }
-      .settings label {
-        display: flex;
-        align-items: center;
-      }
-      .settings label input {
-        margin-right: 6px;
+        border-radius: 4px;
+        margin-top: 4px;
       }
     </style>
   </head>
   <body>
-
-    <input class="domain" disabled value="domain" />
     <form id="settings">
-      <div class="settings">
-        <label>
-          <input type="checkbox" name="overflow_hidden_killer_disabled" />
-          Disable overflow hidden killer
-        </label>
-      </div>
+      <label>
+        Refresh interval (minutes)
+        <input type="number" id="refresh-interval" min="0" />
+      </label>
     </form>
-
     <script src="popup.js"></script>
   </body>
 </html>

@@ -1,13 +1,16 @@
 (() => {
+  const input = document.getElementById('refresh-interval');
 
-  const settingsFormEl = document.getElementById('settings');
-  settingsFormEl.addEventListener('change', function (ev) {
-    console.log(ev.target.name, ev.target.checked);
+  chrome.storage.sync.get({ refreshIntervalMinutes: 0 }, (data) => {
+    if (data.refreshIntervalMinutes) {
+      input.value = data.refreshIntervalMinutes;
+    }
   });
 
-  chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-    // tabs[0] is the active tab in the current window
-    // let url = tabs[0].url;
+  input.addEventListener('change', () => {
+    const minutes = parseInt(input.value, 10);
+    chrome.storage.sync.set({
+      refreshIntervalMinutes: isNaN(minutes) ? 0 : minutes,
+    });
   });
-
 })();
