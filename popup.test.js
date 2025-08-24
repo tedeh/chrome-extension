@@ -17,7 +17,7 @@ describe('popup', () => {
     expect(input.value).toBe('5');
     expect(input.placeholder).toBe('Not active');
     input.value = '10';
-    input.dispatchEvent(new Event('change'));
+    window.dispatchEvent(new Event('unload'));
     expect(set).toHaveBeenCalledWith({ refreshIntervalMinutes: 10 });
     disable.click();
     expect(set).toHaveBeenCalledWith({ refreshIntervalMinutes: 0 });
