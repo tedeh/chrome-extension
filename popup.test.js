@@ -2,25 +2,38 @@ const path = './popup.js';
 
 describe('popup', () => {
   test('handles refresh interval and disable button', () => {
+    jest.useFakeTimers();
     document.body.innerHTML =
       '<form id="settings">' +
       '<input id="refresh-interval" type="number" placeholder="Not active"/>' +
       '<button id="disable" type="button"></button>' +
       '</form><p id="countdown"></p>';
-    const get = jest.fn((defaults, cb) => cb({ refreshIntervalMinutes: 5 }));
-    const set = jest.fn();
-    global.chrome = { storage: { sync: { get, set } } };
+    const query = jest.fn((opts, cb) => cb([{ id: 1 }]));
+    const sendMessage = jest.fn((id, msg, cb) => {
+      if (msg.type === 'getInterval') {
+        cb && cb({ refreshIntervalMinutes: 5 });
+      } else {
+        cb && cb({});
+      }
+    });
+    global.chrome = { tabs: { query, sendMessage } };
     require(path);
     const input = document.getElementById('refresh-interval');
     const disable = document.getElementById('disable');
-    expect(get).toHaveBeenCalled();
     expect(input.value).toBe('5');
-    expect(input.placeholder).toBe('Not active');
+    sendMessage.mockClear();
     input.value = '10';
     input.dispatchEvent(new Event('change'));
-    expect(set).toHaveBeenCalledWith({ refreshIntervalMinutes: 10 });
+    expect(sendMessage).toHaveBeenCalledWith(1, {
+      type: 'setInterval',
+      minutes: 10,
+    });
+    sendMessage.mockClear();
     disable.click();
-    expect(set).toHaveBeenCalledWith({ refreshIntervalMinutes: 0 });
+    expect(sendMessage).toHaveBeenCalledWith(1, {
+      type: 'setInterval',
+      minutes: 0,
+    });
     delete global.chrome;
   });
 });

@@ -1,7 +1,24 @@
 (() => {
+  const KEY = 'autoRefreshMinutes';
   let refreshIntervalMinutes = 0;
   let timeoutId;
   let nextRefreshTime = 0;
+
+  const save = () => {
+    if (refreshIntervalMinutes > 0) {
+      try {
+        sessionStorage.setItem(KEY, String(refreshIntervalMinutes));
+      } catch (e) {
+        // ignore
+      }
+    } else {
+      try {
+        sessionStorage.removeItem(KEY);
+      } catch (e) {
+        // ignore
+      }
+    }
+  };
 
   const resetTimer = () => {
     if (timeoutId) {
@@ -17,11 +34,14 @@
     }
   };
 
-  const loadInterval = () => {
-    chrome.storage.sync.get({ refreshIntervalMinutes: 0 }, (data) => {
-      refreshIntervalMinutes = data.refreshIntervalMinutes || 0;
-      resetTimer();
-    });
+  const load = () => {
+    try {
+      const stored = sessionStorage.getItem(KEY);
+      refreshIntervalMinutes = stored ? parseInt(stored, 10) || 0 : 0;
+    } catch (e) {
+      refreshIntervalMinutes = 0;
+    }
+    resetTimer();
   };
 
   ['click', 'mousemove', 'keydown', 'scroll', 'touchstart'].forEach((event) => {
@@ -35,18 +55,16 @@
           remainingMs: nextRefreshTime ? nextRefreshTime - Date.now() : 0,
           refreshIntervalMinutes,
         });
-      }
-    });
-  }
-
-  if (chrome.storage && chrome.storage.onChanged) {
-    chrome.storage.onChanged.addListener((changes, area) => {
-      if (area === 'sync' && changes.refreshIntervalMinutes) {
-        refreshIntervalMinutes = changes.refreshIntervalMinutes.newValue || 0;
+      } else if (request.type === 'setInterval') {
+        refreshIntervalMinutes = request.minutes || 0;
+        save();
         resetTimer();
+        sendResponse({ success: true });
+      } else if (request.type === 'getInterval') {
+        sendResponse({ refreshIntervalMinutes });
       }
     });
   }
 
-  loadInterval();
+  load();
 })();
