@@ -31,6 +31,7 @@
   };
 
   input.addEventListener('change', save);
+  window.addEventListener('unload', save);
 
   disableBtn.addEventListener('click', () => {
     input.value = '';
