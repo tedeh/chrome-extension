@@ -45,7 +45,8 @@
         "overflow_hidden_killer.js",
         "meta_f_unabuser.js",
         "copy_unabuser.js",
-        "utm_link_killer.js"
+        "utm_link_killer.js",
+        "auto_refresh.js"
       ]
     }
   ]

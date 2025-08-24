@@ -1,42 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Popup</title>
+    <title>Auto Refresh Settings</title>
     <style>
-      *  {
-        box-sizing: border-box;
-      }
       body {
         min-width: 230px;
+        font-family: sans-serif;
+        padding: 10px;
       }
-       input.domain {
-        width: 100%;
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      input[type="number"] {
         padding: 6px;
         border: 1px solid #ccc;
-        border-radius: 6px;
-        margin-bottom: 6px;
+        border-radius: 4px;
       }
-      .settings label {
-        display: flex;
-        align-items: center;
+      button {
+        padding: 6px;
+        border: none;
+        background-color: #f44336;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
       }
-      .settings label input {
-        margin-right: 6px;
+      #countdown {
+        margin-top: 4px;
+        font-size: 0.9em;
+        color: #555;
       }
     </style>
   </head>
   <body>
-
-    <input class="domain" disabled value="domain" />
     <form id="settings">
-      <div class="settings">
-        <label>
-          <input type="checkbox" name="overflow_hidden_killer_disabled" />
-          Disable overflow hidden killer
-        </label>
-      </div>
+      <label>
+        Refresh interval (minutes, min 1)
+        <input type="number" id="refresh-interval" min="1" placeholder="Not active" />
+      </label>
+      <button type="button" id="disable">Disable refresh</button>
     </form>
-
+    <p id="countdown"></p>
     <script src="popup.js"></script>
   </body>
 </html>
