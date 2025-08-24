@@ -7,26 +7,41 @@
         min-width: 230px;
         font-family: sans-serif;
       }
-      label {
+      form {
         display: flex;
         flex-direction: column;
+        gap: 8px;
       }
       input[type="number"] {
         width: 100%;
         padding: 6px;
         border: 1px solid #ccc;
         border-radius: 4px;
+      }
+      button {
+        padding: 6px;
+        border: none;
+        background-color: #f44336;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #countdown {
         margin-top: 4px;
+        font-size: 0.9em;
+        color: #555;
       }
     </style>
   </head>
   <body>
     <form id="settings">
       <label>
-        Refresh interval (minutes)
-        <input type="number" id="refresh-interval" min="0" />
+        Refresh interval (minutes, min 1)
+        <input type="number" id="refresh-interval" min="1" placeholder="Not active" />
       </label>
+      <button type="button" id="disable">Disable refresh</button>
     </form>
+    <p id="countdown"></p>
     <script src="popup.js"></script>
   </body>
 </html>
