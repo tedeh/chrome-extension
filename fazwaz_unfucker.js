@@ -1,16 +1,18 @@
 (() => {
   const selector = 'header,main';
 
-  setInterval(() => {
+  const cb = () => {
     const els = Array.from(document.querySelectorAll(selector));
     els.forEach(el => {
       kill(el);
     });
-  }, 50);
+    setTimeout(cb, 1000);
+  };
+
+  setTimeout(cb, 1000);
 
   function kill (target) {
     target.style.cssText = 'filter: none';
-    console.log('killed', target);
   }
 
 })();
