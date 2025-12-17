@@ -38,6 +38,10 @@
       "js": ["fazwaz_unfucker.js"]
     },
     {
+      "matches": ["https://bangkokresidential.com/*", "https://www.bangkokresidential.com/*"],
+      "js": ["contextmenu_unabuser.js"]
+    },
+    {
       "matches": ["https://*/*"],
       "js": [
         "twitter_link_killer.js",
